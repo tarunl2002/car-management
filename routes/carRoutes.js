@@ -88,7 +88,7 @@ router.delete('/:id', auth, async (req, res) => {
     if (!car || car.userId.toString() !== req.user.id) {
       return res.status(404).json({ message: 'Car not found' });
     }
-    await car.remove();
+    await Car.findByIdAndDelete(req.params.id);
     res.json({ message: 'Car deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });
